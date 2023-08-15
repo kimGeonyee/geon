@@ -2,30 +2,19 @@
 
 document.addEventListener("DOMContentLoaded", function(){
     partyView = new party_view();
-    partyView.init();
-    
-    var str = '\
-    <div class="chating-body-msg">\
-        <div class="chating-body-msg-w">\
-            <div class="chating-body-msg-profile">\
-                <img class="chating-body-msg-profile-img" src="./resources/images/profile.png">\
-                <div class="chating-body-msg-profile-name">'+name+'</div>\
-            </div>\
-            <div class="chating-body-msg-box">\
-                <div class="chating-body-msg-box-read bubble-msg">'
-                    +contents+
-                '</div>\
-                <div class="chating-body-msg-box-date">\
-                    '+date+'\
-                </div>\
-                <button class="chating-body-msg-box-pop">\
-                    <img class="chating-body-msg-box-pop-img" src="./resources/images/msg_pop_img.png">\
-                </button>\
-            </div>\
-        </div>\
-    </div>';
 
-    
+    //통신
+    axios({
+        url: '/komi/partys', // 통신할 웹문서
+        method: 'get', // 통신할 방식
+        data: { // 인자로 보낼 데이터
+          userid : 23
+          ,partyid : 121
+        }
+    }).then(function(response){
+        console.log('response : ' + response);
+        partyView.init(response);
+    });
 
 });
 
@@ -35,12 +24,19 @@ function party_view() {
 }
 
 party_view.prototype = {
-    init : function() {
-        var imgUrl = "./resources/images/launcher.png";
+    init : function(response) {
+
+        
+        
+        
+
+
+
+        var imgUrl = "/komi/resources/images/launcher.png";
         var nickname = "낭만소년";
         var region = "강원도";
         var beleiveNum = 60;
-        var belImgUrl = "./resources/images/launcher.png";
+        var belImgUrl = "/komi/resources/images/launcher.png";
 
         var title = "삼겹살 먹으러 가실 분!";
         var category = "모임";
@@ -59,6 +55,7 @@ party_view.prototype = {
         var chatNum = 100;
         var selecNum = 100;
 
+        
 
         //프로필
         $("#article-profile-image-box img").attr("src", imgUrl);
@@ -94,6 +91,33 @@ party_view.prototype = {
         //하단 
         $("#article-counts").text("찜 " + callNum + " ∙ 채팅 " + chatNum + " ∙ 조회 " + selecNum);
 
+
+
+
+
+    }
+    ,
+    makeMessage : function(){
+        var str = '\
+        <div class="chating-body-msg">\
+            <div class="chating-body-msg-w">\
+                <div class="chating-body-msg-profile">\
+                    <img class="chating-body-msg-profile-img" src="/komi/resources/images/profile.png">\
+                    <div class="chating-body-msg-profile-name">'+name+'</div>\
+                </div>\
+                <div class="chating-body-msg-box">\
+                    <div class="chating-body-msg-box-read bubble-msg">'
+                        +contents+
+                    '</div>\
+                    <div class="chating-body-msg-box-date">\
+                        '+date+'\
+                    </div>\
+                    <button class="chating-body-msg-box-pop">\
+                        <img class="chating-body-msg-box-pop-img" src="./komi/resources/images/msg_pop_img.png">\
+                    </button>\
+                </div>\
+            </div>\
+        </div>';
     }
     ,
     buttonEvent : function(){
