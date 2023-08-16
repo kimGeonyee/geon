@@ -32,21 +32,17 @@ public class partySelectServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		int userid = Integer.parseInt(request.getParameter("userid"));
+		//int userid = Integer.parseInt(request.getParameter("userid"));
 		int partyid = Integer.parseInt(request.getParameter("partyid"));
-		Member member = new MemberService().selectMember(userid);
+		//Member member = new MemberService().selectMember(userid);
 		Party party = new PartyService().selectParty(partyid);
 		
-		if(party != null && member.getGender() == party.getAuthority()) {
+		//볼수는 있지만 참여는 안되게
+		
+		if(party != null) {
 			
 		} else {
-			if(party == null) {
-				//파티가 없음
-			}
 			
-			if(party != null && member.getGender() != party.getAuthority()) {
-				//성별 권한이 없음
-			}
 		}
 		
 	}

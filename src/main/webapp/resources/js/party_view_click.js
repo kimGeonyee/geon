@@ -8,12 +8,14 @@ document.addEventListener("DOMContentLoaded", function(){
         url: '/komi/partys', // 통신할 웹문서
         method: 'get', // 통신할 방식
         data: { // 인자로 보낼 데이터
-          userid : 23
-          ,partyid : 121
-        }
+            partyid : 121
+        },
+        headers: { 'Content-Type': 'application/json' }
     }).then(function(response){
-        console.log('response : ' + response);
+        console.log('data : ' + response.data);
         partyView.init(response);
+    }).catch(function(error){
+        console.log(error);
     });
 
 });
